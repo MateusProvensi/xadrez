@@ -1,10 +1,14 @@
 package aplicacao;
 
+import xadrez.PartidaXadrez;
+
 public class Programa {
 
 	public static void main(String[] args) {
 		
-		System.out.print("Para salvar");
+		PartidaXadrez partidaXadrez = new PartidaXadrez();
+		
+		UI.visualizarTabuleiro(partidaXadrez.getPecas());
 		
 	}
 
