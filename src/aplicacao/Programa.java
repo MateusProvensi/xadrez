@@ -17,7 +17,6 @@ public class Programa {
 		Scanner sc = new Scanner(System.in);
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
 		List<PecaXadrez> capturadas = new ArrayList<>();
-		
 
 		while (!partidaXadrez.getCheckMate()) {
 			try {
@@ -26,21 +25,34 @@ public class Programa {
 				System.out.println();
 				System.out.print("Origem: ");
 				XadrezPosicao origem = UI.lerPosicaoXadrez(sc);
-				
-				boolean [][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem);
+
+				boolean[][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem);
 				UI.limpaTela();
 				UI.visualizarTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
-				
+
 				System.out.println();
 				System.out.print("Destino: ");
 				XadrezPosicao destino = UI.lerPosicaoXadrez(sc);
 
 				PecaXadrez pecaCapturada = partidaXadrez.moverPecaXadrez(origem, destino);
-				
-				if (pecaCapturada != null)  {
+
+				if (pecaCapturada != null) {
 					capturadas.add(pecaCapturada);
 				}
-				
+
+				if (partidaXadrez.getPromocao() != null) {
+					System.out.println("Digite a peça para promoção (B/C/T/Q)");
+					String tipo = sc.next().toUpperCase();
+
+					while (!tipo.equals("B") && !tipo.equals("C") && tipo.equals("T") && tipo.equals("Q")) {
+						System.out.println("Valor inválido, digite novamente.");
+						System.out.print("Digite a peça para promoção (B/C/T/Q): ");
+						tipo = sc.next().toUpperCase();
+						
+					}
+					partidaXadrez.recolocarPecaPromovida(tipo);
+				}
+
 			} catch (XadrezException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
@@ -49,7 +61,7 @@ public class Programa {
 				sc.nextLine();
 			}
 		}
-		
+
 		UI.limpaTela();
 		UI.visualizarPartida(partidaXadrez, capturadas);
 
