@@ -1,2 +1,3 @@
-# xadrez
-É um sistema de um jogo de xadrez feito em Java
+#♟Chess♟
+#📚Preview
+The project was made to learn Java and OOP.
